@@ -1,0 +1,124 @@
+Write a program that outputs the pattern shown below, ending with a newline. Each line of the pattern contains 5 characters including whitespace.
+
+The output is:
+
+H   H
+H   H
+HHHHH
+H   H
+H   H
+
+
+public class index {
+    public static void main(String[] args) {
+        for(int i = 0; i < 5; ++i) {
+            if (i == 2) {
+                // String result = new String(new char[]{num, num, num, num});
+                String result = "HHHHH";
+                System.out.println(result);
+            } else {
+                System.out.println("H   H");
+            }
+        }
+    }
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+Write a program that collects two integer inputs and assigns them to the variables starting_num and multiplier. Multiply starting_num by multiplier and output the result. Repeat this process two more times, each time multiplying the previous result by multiplier. The three product outputs should be separated by a whitespace character, ending with a newline.
+
+If the input is:
+
+2
+5
+the output when starting_num = 2 is:
+
+10 50 250
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import java.util.Scanner;
+
+public class index {
+    public static void main(String[] args) {
+        // first number 
+        Scanner userInput1 = new Scanner(System.in);
+        int starting_num = userInput1.nextInt();
+
+        // second number
+        Scanner userInput2 = new Scanner(System.in);
+        int multiplier = userInput2.nextInt();
+
+        userInput1.close();
+        userInput2.close();
+
+        int first_result = starting_num * multiplier;
+        int second_result = first_result * multiplier;
+        int third_result = second_result * multiplier;
+        System.out.println(first_result + " " + second_result + " " + third_result);
+    }
+}
+
+OR ///
+import java.util.Scanner;
+
+public class index {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int starting_num_input = GetInput(scanner, "Enter the starting number: ");
+        int multiplier = GetInput(scanner, "Enter the multiplier: ");
+
+        int result = Calculator(starting_num_input, multiplier);
+        int result2 = Calculator(result, multiplier);
+        int result3 = Calculator(result2, multiplier);
+        System.out.println(result + " " + result2 + " " + result3);
+
+        scanner.close();
+    }
+
+    public static int GetInput(Scanner scanner, String prompt) {
+        System.out.print(prompt);
+        int num = scanner.nextInt();
+
+        return num;
+    }
+
+    public static int Calculator(int starting_num, int multiplier) {
+        int result = starting_num * multiplier;
+        return result; 
+    }
+}
+//////////////////////////////////////////////////////////////////
+
+
+Write a program that calculates the number of full tables for a wedding event, based on the number of expected guests. Each full table will seat 10 wedding guests.
+
+Collect one integer input and assign it to the variable guests. Using integer division, calculate the total number of tables that will be filled. The variable tableSize has been declared and initialized and the variables guests and tablesFilled have been declared in the template code.
+
+Output the number of tables filled, ending with a newline. Ensure your program output matches the example formatting below and works for a variety of input values.
+
+If the input is:
+
+340
+the output is:
+
+Tables filled: 34
+Alternatively, if the input is:
+
+349
+the output is:
+
+Tables filled: 34
+/////
+
+Write a program that takes a full name, age, and salary as inputs on separate lines. Output a formatted message containing the inputs, ending with a newline. Ensure your program output matches the example formatting below and works for a variety of input values.
+
+If the input is:
+
+Pat Ford
+35
+60,000
+the output is:
+
+Pat Ford is 35 and makes $60,000.
