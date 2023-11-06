@@ -1,5 +1,5 @@
 
-// QUESTION 2 //
+// QUESTION 2 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Write a program that collects two integer inputs and assigns them to the variables starting_num and multiplier.
 // Multiply starting_num by multiplier and output the result. Repeat this process two more times, each time multiplying the previous result by multiplier.
@@ -46,4 +46,25 @@ public class MultiplyNumbers {
         return result; 
     }
 }
+
+// Hard coded version
+// public class MultiplyNumbers {
+//     public static void main(String[] args) {
+//         // first number 
+//         Scanner userInput1 = new Scanner(System.in);
+//         int starting_num = userInput1.nextInt();
+
+//         // second number
+//         Scanner userInput2 = new Scanner(System.in);
+//         int multiplier = userInput2.nextInt();
+
+//         userInput1.close();
+//         userInput2.close();
+
+//         int first_result = starting_num * multiplier;
+//         int second_result = first_result * multiplier;
+//         int third_result = second_result * multiplier;
+//         System.out.println(first_result + " " + second_result + " " + third_result);
+//     }
+// }
 
