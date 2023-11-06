@@ -47,6 +47,7 @@ public class StringInput {
     public static void FormatName(String userName) {
         String[] names = userName.split(" ");
         // check if there is a middle initial
+        // I am showing variance in the way I am formatting to show that there are multiple options to acheive the desired format
             if(names.length == 3) {
                 String firstName = names[0];
                 String middleInitial = names[1];
