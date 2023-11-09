@@ -1,124 +1,579 @@
-Write a program that outputs the pattern shown below, ending with a newline. Each line of the pattern contains 5 characters including whitespace.
+// QUESTION 1 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-The output is:
+// Write a program that outputs the pattern shown below, ending with a newline. Each line of the pattern contains 5 characters including whitespace.
+// The output is:
 
-H   H
-H   H
-HHHHH
-H   H
-H   H
+// H   H
+// H   H
+// HHHHH
+// H   H
+// H   H
+
+import java.util.Scanner;
+
+// Hard code version for one use
+
+// public class OutputPattern {
+//     public static void main(String[] args) {
+//         for(int i = 0; i < 5; ++i) {
+//             if (i == 2) {
+//    
+//                 String result = "HHHHH";
+//                 System.out.println(result);
+//             } else {
+//                 System.out.println("H   H");
+//             }
+//         }
+//     }
+// }
 
 
-public class index {
+
+// Scalable version 
+
+public class OutputPattern {
     public static void main(String[] args) {
-        for(int i = 0; i < 5; ++i) {
-            if (i == 2) {
-                // String result = new String(new char[]{num, num, num, num});
-                String result = "HHHHH";
-                System.out.println(result);
+        // scanner to gather user input
+        Scanner scanner = new Scanner(System.in);
+
+        // call the GetInput() method with the scanner and desired prompt 
+        String result = GetInput(scanner, "Enter a character: ");
+        // call the CreatePattern() method to acheive desired output
+        String pattern = CreatePattern(result);
+        // print the pattern to the terminal
+        System.out.println(pattern);
+        // close the scanner
+        scanner.close();
+    }
+    // method to retrieve user input
+    public static String GetInput(Scanner scanner, String prompt) {
+        // Print the prompt in the terminal 
+        System.out.print(prompt);
+        // Store the userInput in a variable
+        String userInput = scanner.nextLine();
+        // return the user input 
+        return userInput;
+    }
+    // method to create the pattern
+    public static String CreatePattern(String userInput) {
+        // use the StringBuilder function to create an pattern object
+        StringBuilder pattern = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            // accounts for the horizontal line at the index of 2
+            if(i == 2) {
+                    pattern.append(userInput.repeat(5));
+                    pattern.append("\n");
             } else {
-                System.out.println("H   H");
+                pattern.append(userInput + " ".repeat(3) + userInput);
+                pattern.append("\n");
             }
         }
+        return pattern.toString();
     }
 }
 
 
+// QUESTION 2 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Write a program that collects two integer inputs and assigns them to the variables starting_num and multiplier.
+// Multiply starting_num by multiplier and output the result. Repeat this process two more times, each time multiplying the previous result by multiplier.
+// The three product outputs should be separated by a whitespace character, ending with a newline.
+// If the input is:
+// 2
+// 5
+// the output when starting_num = 2 is:
+// 10 50 250
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-Write a program that collects two integer inputs and assigns them to the variables starting_num and multiplier. Multiply starting_num by multiplier and output the result. Repeat this process two more times, each time multiplying the previous result by multiplier. The three product outputs should be separated by a whitespace character, ending with a newline.
-
-If the input is:
-
-2
-5
-the output when starting_num = 2 is:
-
-10 50 250
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// import the scanner library for use of System.in for user input
 import java.util.Scanner;
 
-public class index {
+// Hard coded version
+// public class MultiplyNumbers {
+//     public static void main(String[] args) {
+//         // first number 
+//         Scanner userInput1 = new Scanner(System.in);
+//         int starting_num = userInput1.nextInt();
+
+//         // second number
+//         Scanner userInput2 = new Scanner(System.in);
+//         int multiplier = userInput2.nextInt();
+
+//         userInput1.close();
+//         userInput2.close();
+
+//         int first_result = starting_num * multiplier;
+//         int second_result = first_result * multiplier;
+//         int third_result = second_result * multiplier;
+//         System.out.println(first_result + " " + second_result + " " + third_result);
+//     }
+// }
+
+public class MultiplyNumbers {
     public static void main(String[] args) {
-        // first number 
-        Scanner userInput1 = new Scanner(System.in);
-        int starting_num = userInput1.nextInt();
-
-        // second number
-        Scanner userInput2 = new Scanner(System.in);
-        int multiplier = userInput2.nextInt();
-
-        userInput1.close();
-        userInput2.close();
-
-        int first_result = starting_num * multiplier;
-        int second_result = first_result * multiplier;
-        int third_result = second_result * multiplier;
-        System.out.println(first_result + " " + second_result + " " + third_result);
-    }
-}
-
-OR ///
-import java.util.Scanner;
-
-public class index {
-    public static void main(String[] args) {
+        // create and instantiate the scanner object for user input
         Scanner scanner = new Scanner(System.in);
+        // gather the user input through a prompt, using the GetInput() method
         int starting_num_input = GetInput(scanner, "Enter the starting number: ");
         int multiplier = GetInput(scanner, "Enter the multiplier: ");
 
+        // run the results through the Calculator() method
         int result = Calculator(starting_num_input, multiplier);
         int result2 = Calculator(result, multiplier);
         int result3 = Calculator(result2, multiplier);
+        // output the desired String format of results
         System.out.println(result + " " + result2 + " " + result3);
 
+        // close the scanner when done to avoid memory leaks
         scanner.close();
     }
-
+    // GetInput method retreives the user input
     public static int GetInput(Scanner scanner, String prompt) {
+        // print the prompt argument
         System.out.print(prompt);
+        // gather the int input from the scanner
         int num = scanner.nextInt();
-
+        // return the input 
         return num;
     }
-
+    // Calculator method takes care of the multiplying logic
     public static int Calculator(int starting_num, int multiplier) {
         int result = starting_num * multiplier;
         return result; 
     }
 }
-//////////////////////////////////////////////////////////////////
 
 
-Write a program that calculates the number of full tables for a wedding event, based on the number of expected guests. Each full table will seat 10 wedding guests.
+// QUESTION 3 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Collect one integer input and assign it to the variable guests. Using integer division, calculate the total number of tables that will be filled. The variable tableSize has been declared and initialized and the variables guests and tablesFilled have been declared in the template code.
 
-Output the number of tables filled, ending with a newline. Ensure your program output matches the example formatting below and works for a variety of input values.
+// Write a program that calculates the number of full tables for a wedding event, based on the number of expected guests.
+// Each full table will seat 10 wedding guests.
+// Collect one integer input and assign it to the variable guests. Using integer division, calculate the total number of tables that will be filled. 
+// The variable tableSize has been declared and initialized and the variables guests and tablesFilled have been declared in the template code.
+// Output the number of tables filled, ending with a newline. Ensure your program output matches the example formatting below and works for a variety of input values.
 
-If the input is:
+// If the input is:
+// 340
+// the output is:
+// Tables filled: 34
 
-340
-the output is:
+// Alternatively, if the input is:
+// 349
+// the output is:
+// Tables filled: 34
+import java.util.Scanner;
 
-Tables filled: 34
-Alternatively, if the input is:
+public class IntegerDivision {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        final int tableSize = 10;
+        int guests = GetInput(scanner, "Please enter the number of guests: ");
 
-349
-the output is:
+        int result = Calculator(guests, tableSize);
+        System.out.println("Tables filled: " + result);
+    }
+    // method that retrieves the user input integer
+    public static int GetInput(Scanner scanner, String prompt) {
+        System.out.print(prompt);
+        int guests = scanner.nextInt();
+        return guests;
+    }
+    public static int Calculator(int guests, int tableSize) {
+        int tablesFiled = guests / tableSize;
+        return tablesFiled;
+    }
+}
+// QUESTION 4 ///////////////////////////////////////////////////////////////////////////////////
 
-Tables filled: 34
-/////
+// Write a program that takes a full name, age, and salary as inputs on separate lines. 
+// Output a formatted message containing the inputs, ending with a newline. 
+// Ensure your program output matches the example formatting below and works for a variety of input values.
 
-Write a program that takes a full name, age, and salary as inputs on separate lines. Output a formatted message containing the inputs, ending with a newline. Ensure your program output matches the example formatting below and works for a variety of input values.
+// If the input is:
+// Pat Ford
+// 35
+// 60,000
 
-If the input is:
+// the output is:
+// Pat Ford is 35 and makes $60,000.
 
-Pat Ford
-35
-60,000
-the output is:
+import java.util.Scanner;
+import java.text.NumberFormat;
 
-Pat Ford is 35 and makes $60,000.
+class FormatInputs {
+    public static void main(String[] args) {
+        // creation of scanners for each input 
+        Scanner age_scanner = new Scanner(System.in);
+        Scanner name_scanner = new Scanner(System.in);
+        Scanner salary_scanner = new Scanner(System.in);
+
+        // retrieval of scanner input 
+        String name_input = GetName(name_scanner);
+        int age_input = GetAge(age_scanner);
+        int salary_input = GetSalary(salary_scanner);
+
+        // formatted salary 
+        String formatted_salary = SalaryFormat(salary_input);
+
+        // formatted string that prints in the terminal
+        System.out.print(name_input + " is " + age_input + " and makes " + formatted_salary);
+
+    }
+    // method that retrieves input from the user
+    public static int GetAge(Scanner scanner) {
+        // age prompt
+        System.out.print("Enter Age: ");
+        int age = scanner.nextInt();
+        return age;
+    }
+    public static String GetName(Scanner scanner) {
+        // name prompt
+        System.out.print("Enter Name: ");
+        String name = scanner.nextLine();
+        return name;
+    }
+    public static int GetSalary(Scanner scanner) {
+        // salary prompt
+        System.out.print("Enter Salary: ");
+        int salary = scanner.nextInt();
+        return salary;
+    }
+    // this part is not neccessary, you can simply format the string itself in the main class. I wanted to account for no comma in the input
+    public static String SalaryFormat(int salary) {
+        // NumberFormat instance
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+        // set decimals to 0 
+        currencyFormat.setMaximumFractionDigits(0);
+        // format the salary
+        String formattedMoney = currencyFormat.format(salary);
+        return formattedMoney;
+    }
+}
+
+// QUESTION 5 /////////////////////////////////////////////////////////////////////////////////////////////////////
+// A number is divisible by 3 if the sum of its digits is divisible by 3.
+// For example, 153 is divisible by 3 because 1 + 5 + 3 = 9 and 9 is divisible by 3.
+ 
+// Write a program that collects three integer inputs representing the place values of a three-digit number. 
+// Determines whether the sum of the digits is divisible by 3. If any integer entered is a negative value, output Invalid input!
+ 
+// Output a formatted message identifying if the three-digit number is divisible by 3, ending with a newline. 
+// Ensure your program output matches the example formatting below and works for a variety of input values.
+ 
+// If the input is:
+// 1
+// 5
+// 3
+ 
+// the output is:
+// 153 is divisible by 3!
+ 
+// Alternatively, if the input is:
+// 1
+// 0
+// 4
+ 
+// the output is:
+// 104 is not divisible by 3!
+ 
+// Alternatively, if the input is:
+// 1
+// -5
+// 3
+ 
+// the output is:
+// Invalid input!
+
+import java.util.Scanner;
+
+public class IsDivisibleBy {
+    public static void main(String[] args) {
+        // create scanner instances
+        Scanner digit_1 = new Scanner(System.in);
+        Scanner digit_2 = new Scanner(System.in);
+        Scanner digit_3 = new Scanner(System.in);
+        
+        // record user input into variables
+        int digit_1_input = GetInput(digit_1);
+        int digit_2_input = GetInput(digit_2);
+        int digit_3_input = GetInput(digit_3);
+
+        // checks whether inputs are positive
+        if(digit_1_input < 0 || digit_2_input < 0 || digit_3_input < 0) {
+            String invalid_input = "Invalid input!";
+            System.out.print(invalid_input);
+            // if any input is not positive, the main method returns
+            return;
+        }
+        // result of adding the numbers 
+        int added_nums = digit_1_input + digit_2_input + digit_3_input;
+        // formatted number to String 
+        String format_numbers = Integer.toString(digit_1_input) + Integer.toString(digit_2_input) + Integer.toString(digit_3_input);
+
+        // call IsDivisible() method on the added numbers
+        boolean result = IsDivisible(added_nums);
+        if(result == true) {
+            String formatted_result_true = (format_numbers + " is divisible by 3!");
+            // Print result to the terminal
+            System.out.print(formatted_result_true);
+        } else {
+            // Print result to the terminal
+            String formatted_result_false = (format_numbers + " is not divisible by 3!");
+            System.out.println(formatted_result_false);
+        }
+        // close the scanners 
+        digit_1.close();
+        digit_2.close();
+        digit_3.close();
+    }
+    // Method gets input from user
+    public static int GetInput(Scanner scanner) {
+        // prompt
+        System.out.print("Enter number: ");
+        return scanner.nextInt();
+    }
+    // Method checks if added numbers is divisible by 3
+    public static boolean IsDivisible(int added_nums) {
+        if ((added_nums % 3) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+// QUESTION 6 /////////////////////////////////////////////////////////////////////////////////////////////
+
+// Write a program that collects a full name as one string input.
+ 
+// Format and output the name as shown below:
+// lastInitial., firstName middleInitial.
+ 
+// If no middle name was provided, format and output the name as shown below:
+// lastInitial., firstName
+ 
+// If the input is:
+// Pat Silly Doe
+ 
+// the output is:
+// D., Pat S.
+ 
+// Alternatively, if the input is:
+// Julia Clark
+ 
+// the output is:
+// C., Julia
+
+import java.util.Scanner;
+
+public class StringInput {
+    public static void main(String[] args) {
+        // Create scanner instance
+        Scanner scanner = new Scanner(System.in);
+        String userName = GetInput(scanner);
+        // use method to format the name
+        FormatName(userName);
+        // close scanner
+        scanner.close();
+        
+
+    }
+    // method retreives input from user
+    public static String GetInput(Scanner scanner) {
+        // user prompt
+        System.out.print("Enter full name: ");
+        // nextLine() find the entire entry
+        String userName = scanner.nextLine();
+        return userName;
+
+    }
+    // method splits the name into an array, assigns each into a variable and prints the formatted String
+    public static void FormatName(String userName) {
+        String[] names = userName.split(" ");
+        // check if there is a middle initial
+        // I am showing variance in the way I am formatting to show that there are multiple options to acheive the desired format
+            if(names.length == 3) {
+                String firstName = names[0];
+                String middleInitial = names[1];
+                String lastInitial = names[2].substring(0,1);
+                String format = lastInitial +"., " +  firstName + " " +  middleInitial.charAt(0) + ".";
+                System.out.println(format);
+            }
+            // if there is no middle initial 
+            if(names.length == 2) {
+                String firstName = names[0];
+                String lastInitial = names[1].substring(0,1) + "., ";
+                System.out.println(lastInitial + firstName);
+            }
+            // returns if there is not 2 or 3 words
+            else {
+                System.out.println("Please enter a valid name. Terminating program..");
+                return;
+        }
+
+    }
+}
+
+// QUESTION 7 ///////////////////////////////////////////////////////////////////////////////////////////////
+
+// Write a program that collects any number of non-negative integer inputs and calculates the sum of the values. 
+// A negative integer should end the input collection and is not part of the sum.
+ 
+// Output the smallest non-negative value and the sum of the non-negative input values, ending with a newline.
+// Ensure your program output matches the example formatting below and works for a variety of input values.
+ 
+// If the input is:
+ 
+// 15 
+// 20 
+// 0 
+// 3 
+// -1 
+ 
+// the output is:
+ 
+// Smallest: 0 
+// Sum: 38
+
+import java.util.Scanner;
+
+public class LoopSum {
+    public static void main(String[] args) {
+        // scanner instance for user input
+        Scanner scanner = new Scanner(System.in);
+        // set the smallest to be larger than any integer value initially 
+        int smallest = Integer.MAX_VALUE;
+        // initialize sum 
+        int sum = 0;
+        // print the prompt to the terminal
+        System.out.println("Enter integers: ");
+
+        // while loop runs until a negative number is entered
+        while(true) {
+            int input = scanner.nextInt();
+
+        // if the input is smaller than 0, break out of the loop
+        if (input < 0) {
+            break;
+            }
+        // update sum
+        sum = sum + input;
+        
+        // check to see if it is smaller than the recorded smallest value
+        if (input < smallest) {
+                smallest = input;
+            }
+        }
+        // after loop closes, print the results to the terminal
+        System.out.println("Sum: " + sum + "\nSmallest: " + smallest);
+        // close the scanner
+        scanner.close();
+
+        }
+    }
+
+// QUESTION 8 /////////////////////////////////////////////////////////////////////////////////////////////////
+// Write a program that creates an array to hold three values of type double. 
+//The program should collect the three double values as input and store them in the array.
+// Then calculate the average value of the array.
+ 
+// Output the array values and calculated average value, ending with a newline. 
+// Ensure your program output matches the example formatting below and works for a variety of input values.
+ 
+// If the input is:
+// 10.0
+// 10.5
+// 11.0
+ 
+// the output is:
+// Array items: 10.0, 10.5, 11.0
+// Average: 10.5
+
+import java.util.Scanner;
+
+public class Arrays {
+    // array that holds 3 double values
+    public static void main(String[] args) {
+    // create array with a length of 3
+    double[] array = new double[3];
+    // initialize scanner 
+    Scanner scanner = new Scanner(System.in);
+    // retrieve inputs for array
+    array[0] = GetInput(scanner);
+    array[1] = GetInput(scanner);
+    array[2] = GetInput(scanner);
+
+    scanner.close();
+    // retreive the average
+    double result = FindAverage(array[0], array[1], array[2]);
+    // print the results
+    System.out.println("Array items: " + array[0] + ", " + array[1] + ", " + array[2]);
+    System.out.println("Average: " + result);
+}
+// uses the scanner to retrieve the user input 
+public static double GetInput(Scanner scanner) {
+    System.out.print("Enter double: ");
+    double input = scanner.nextDouble();
+    return input;
+}
+// method that calculates the average of the 3 doubles
+public static double FindAverage(double input0, double input1, double input2) {
+    double added = input0 + input1 + input2;
+    double average = added / 3;
+    return average;
+}
+}
+
+// QUESTION 9 ///////////////////////////////////////////////////////////////////////////////////////////
+
+// Define a method named "showResults" with one parameter. The parameter should reference a random object rand. 
+// The showResults() method should generate a random integer of 0 or 1 using the random object reference rand. 
+// If the random number generated is equal to 1, return "true". If the random number generated is equal to 0, return "false".
+ 
+// In the main() method template, the rand variable has already been assigned a random object with a seed value of 2. 
+// Write a program that collects one integer value as input, assumed to be greater than 0. Use a loop to call the showResults() method a number of times equal to the integer input.
+// e.g., If 3 is entered as input, then showResults() will be called 3 times, each time returning "true" or "false".
+ 
+// Output the returned Boolean values on separate lines, ending with a newline.
+// If the input is:
+// 3
+ 
+// the output with a random object seed value of 2 is:
+// true
+// false
+// true 
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class RandomMethod {
+    public static void main(String[] args) {
+    // Initialize a random object with a seed value of 2
+    Random rand = new Random(2);
+    // print the prompt to the terminal
+    System.out.print("Enter a positive integer: ");
+    // initialize scanner
+    Scanner scanner = new Scanner(System.in);
+    // record the input
+    int input = scanner.nextInt();
+
+    // loop through while the index is less than the input number, and print the random result
+    for(int i=0; i < input; i++) {
+        boolean result = showResults(rand);
+        System.out.println(result);
+    }
+    // close the scanner 
+    scanner.close();
+
+    }
+    // showResults method 
+    public static boolean showResults(Random rand) {
+        int randomValue = rand.nextInt(2);
+        if(randomValue == 1) {
+            return true;
+        } else { 
+            return false;
+        }
+    }
+
+}
+    
