@@ -1,6 +1,6 @@
 # WGU-D286-Java-Fundementals-PA
 
-My coded answers for the Java PreAssesment at WGU.
+My coded answers for the Java PreAssesment at WGU, Questions 1 - 9. 
 
 Disclaimer: This is NOT the Objective Assesment and does not contain any sensitive
 information. This is how I chose to interpret the answers, however there
